@@ -1,13 +1,10 @@
 package com.hellofresh.api.step_definitions;
 
-import com.google.gson.JsonObject;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.*;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
-import org.omg.CORBA.INTERNAL;
 
 import java.io.File;
 import java.net.URL;
