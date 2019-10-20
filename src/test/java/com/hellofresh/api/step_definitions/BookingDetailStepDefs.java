@@ -1,9 +1,13 @@
 package com.hellofresh.api.step_definitions;
 
+import com.github.javafaker.Faker;
+import com.hellofresh.api.step_definitions.pojo.Booking;
+import com.hellofresh.api.step_definitions.pojo.BookingDates;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.*;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 
 import java.io.File;
@@ -15,9 +19,10 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
 
-public class CountryDetailStepDefs {
+public class BookingDetailStepDefs {
 
     Response response;
+    Faker faker = new Faker();
     ValidatableResponse validatableResponse;
 
     @Given("^The webservice is up and running$")
@@ -63,5 +68,16 @@ public class CountryDetailStepDefs {
                 .body("firstname", hasItem(fname))
                 .body("lastname", hasItem(lname))
                 .body("bookingid", hasItem(Integer.parseInt(booking_id)));
+    }
+
+    @When("^Customer wants to add a new booking records$")
+    public void customerWantsToAddANewBookingRecords() {
+        RequestSpecification httpRequest = given();
+        httpRequest.header("Content-Type", "application/json");
+        BookingDates bookingDates = new BookingDates("2019-10-"+String.valueOf(faker.number().numberBetween(1, 30)) , "2020-11-"+String.valueOf(faker.number().numberBetween(1, 30)));
+        Booking booking = new Booking(bookingDates);
+        httpRequest.body(booking);
+        validatableResponse = httpRequest.post("/createBooking").then();
+        response = validatableResponse.extract().response();
     }
 }

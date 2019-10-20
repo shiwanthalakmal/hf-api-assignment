@@ -21,7 +21,10 @@ Feature: Booking details filter and creation Feature
     And The returned response should include "<firstname>", "<lastname>", and "<bookingid>"
     Examples:
       | firstname | lastname | bookingid |
-      | YyoBOvpY  | oRVyBugJ | 14        |
-      | bFcIzlHB  | fnxFRlgK | 10        |
-      | qPhUEQly  | HHOOZQUp | 11        |
+      | RtbRGxjp  | WJXPjeNN | 8         |
+      | DvrmWmHB  | JtfrpVUk | 9         |
 
+  @Smoke
+  Scenario: Add a new booking through POST request and validate the response
+    When Customer wants to add a new booking records
+    Then The response code should be "201"

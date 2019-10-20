@@ -20,6 +20,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- javafaker - Automatically generate test data-->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.16</version>
+        </dependency>
         <!-- java-hamcrest - To create matchers -->
         <dependency>
             <groupId>org.hamcrest</groupId>
